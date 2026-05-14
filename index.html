@@ -1,0 +1,428 @@
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Line Coding with PSD Comparison Virtual Lab</title>
+  <link rel="icon" type="image/png" href="https://ptuniv.edu.in/assets/images/ptu-logo.png">
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-title">Line Coding with PSD Comparison</div>
+      </div>
+      <nav class="topnav" aria-label="Primary">
+        <button class="nav-btn active" data-section="aim">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><path d="M12 9v3l2 2"/></svg>
+          Aim
+        </button>
+        <button class="nav-btn" data-section="theory">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Theory
+        </button>
+        <button class="nav-btn" data-section="procedure">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>
+          Procedure
+        </button>
+        <button class="nav-btn" data-section="pretest">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Pretest
+        </button>
+        <button class="nav-btn" data-section="simulation">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 20h10"/><path d="M12 18v2"/><path d="M6 12h3l2-4 2 8 2-4h3"/></svg>
+          Simulation
+        </button>
+        <button class="nav-btn" data-section="posttest">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          Posttest
+        </button>
+        <button class="nav-btn" data-section="results">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 6-6"/></svg>
+          Results
+        </button>
+        <button class="nav-btn" data-section="references">
+          <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1"/><path d="M14 11a5 5 0 0 1 0 7l-1 1a5 5 0 0 1-7-7l1-1"/></svg>
+          References
+        </button>
+      </nav>
+      <img class="college-logo" src="assets/ptu-logo.png" alt="PTU Logo">
+    </div>
+  </header>
+
+  <main id="contentArea">
+    <!-- AIM -->
+    <section id="aim" class="panel active">
+      <div class="page-container">
+      <h1>Aim</h1>
+      <p>To analyze and compare various <b>Line Coding Techniques</b> and study their waveform and spectral properties.</p>
+      <ol>
+        <li>To understand categories: Unipolar, Polar, Bipolar, Scrambling, and Partial-Response coding.</li>
+        <li>To generate the line coded signals for a given binary input sequence.</li>
+        <li>To plot and compare the input data waveform and the corresponding line coded waveforms.</li>
+        <li>To compute and analyze the Power Spectral Density (PSD) for each coding scheme.</li>
+      </ol>
+      </div>
+      </section>
+    </section>
+
+    <!-- THEORY -->
+    <section id="theory" class="panel">
+      <div class="page-container">
+      <h1>Theory</h1>
+      <div id="theoryBox" class="theory-grid">
+        <div class="plot-box">
+          <div class="theory-title">Unipolar NRZ</div>
+          <ul class="theory-list">
+            <li><b>Definition:</b> A ‘1’ is +V for full bit duration; a ‘0’ is 0 V.</li>
+            <li><b>Voltage levels:</b> {0, +V}.</li>
+            <li><b>Characteristics:</b> Simple; high low-frequency energy; long runs may have no transitions.</li>
+            <li><b>Advantages:</b> Simplest implementation; low cost; easy detection in short links.</li>
+            <li><b>Disadvantages:</b> Strong DC; poor clock recovery; unsuitable for AC/transformer coupling.</li>
+            <li><b>Applications:</b> Short, DC-coupled digital links and basic lab demonstrations.</li>
+          </ul>
+        </div>
+
+        <div class="plot-box">
+          <div class="theory-title">Unipolar RZ</div>
+          <ul class="theory-list">
+            <li><b>Definition:</b> A ‘1’ is +V for part of bit then returns to 0; a ‘0’ stays at 0.</li>
+            <li><b>Voltage levels:</b> {0, +V} with return-to-zero within the bit.</li>
+            <li><b>Characteristics:</b> More transitions than NRZ; improved timing; increased bandwidth.</li>
+            <li><b>Advantages:</b> Better synchronization than NRZ; reduced sensitivity to timing drift.</li>
+            <li><b>Disadvantages:</b> Larger bandwidth; DC still present for unbalanced data.</li>
+            <li><b>Applications:</b> Baseband links where timing recovery is important.</li>
+          </ul>
+        </div>
+
+        <div class="plot-box">
+          <div class="theory-title">Polar NRZ</div>
+          <ul class="theory-list">
+            <li><b>Definition:</b> Uses +V and −V for bits (level- or transition-based variants).</li>
+            <li><b>Voltage levels:</b> {−V, +V}.</li>
+            <li><b>Characteristics:</b> Better power efficiency than unipolar; DC reduced for random/balanced data.</li>
+            <li><b>Advantages:</b> Good noise margin; reduced DC compared to unipolar; simple decoding.</li>
+            <li><b>Disadvantages:</b> Long constant patterns can lose sync; baseline wander in some channels.</li>
+            <li><b>Applications:</b> Baseband digital transmission and data links.</li>
+          </ul>
+        </div>
+
+        <div class="plot-box">
+          <div class="theory-title">Polar RZ</div>
+          <ul class="theory-list">
+            <li><b>Definition:</b> Each bit returns to 0 within the bit interval with polarity indicating data.</li>
+            <li><b>Voltage levels:</b> {−V, 0, +V} (within-bit return-to-zero).</li>
+            <li><b>Characteristics:</b> Strong timing cues; higher bandwidth than polar NRZ.</li>
+            <li><b>Advantages:</b> Improved synchronization; easier clock extraction.</li>
+            <li><b>Disadvantages:</b> Higher bandwidth requirement; more complex than NRZ.</li>
+            <li><b>Applications:</b> Links needing better timing recovery and reduced baseline issues.</li>
+          </ul>
+        </div>
+
+        <div class="plot-box">
+          <div class="theory-title">Bipolar AMI</div>
+          <ul class="theory-list">
+            <li><b>Definition:</b> ‘1’s alternate +V and −V (marks); ‘0’ is 0 V.</li>
+            <li><b>Voltage levels:</b> {−V, 0, +V}.</li>
+            <li><b>Characteristics:</b> DC-free for typical data; sync degrades on long runs of zeros.</li>
+            <li><b>Advantages:</b> Low DC; transformer-friendly; allows violation-based monitoring.</li>
+            <li><b>Disadvantages:</b> Long zero strings cause no transitions; may need scrambling.</li>
+            <li><b>Applications:</b> Telecom baseband systems and legacy line interfaces.</li>
+          </ul>
+        </div>
+
+        <div class="plot-box">
+          <div class="theory-title">Pseudoternary</div>
+          <ul class="theory-list">
+            <li><b>Definition:</b> ‘0’s alternate +V and −V; ‘1’ is 0 V (inverse of AMI).</li>
+            <li><b>Voltage levels:</b> {−V, 0, +V}.</li>
+            <li><b>Characteristics:</b> DC reduced; transition density depends on distribution of zeros.</li>
+            <li><b>Advantages:</b> Low DC; useful where zero density is high.</li>
+            <li><b>Disadvantages:</b> Sync issues for long runs of ones (since ‘1’ is 0 V).</li>
+            <li><b>Applications:</b> Baseband links where symbol polarity assignment is convenient.</li>
+          </ul>
+        </div>
+
+        <div class="plot-box">
+          <div class="theory-title">Manchester</div>
+          <ul class="theory-list">
+            <li><b>Definition:</b> Mandatory mid-bit transition; direction encodes data.</li>
+            <li><b>Voltage levels:</b> {−V, +V} with mid-bit transition.</li>
+            <li><b>Characteristics:</b> Self-clocking; DC null; higher bandwidth due to frequent transitions.</li>
+            <li><b>Advantages:</b> Excellent synchronization; DC-free; robust clock recovery.</li>
+            <li><b>Disadvantages:</b> Higher bandwidth (≈2× NRZ); higher transition rate.</li>
+            <li><b>Applications:</b> LAN/baseband systems (e.g., classic Ethernet) and timing-critical links.</li>
+          </ul>
+        </div>
+
+        <div class="plot-box">
+          <div class="theory-title">HDB3</div>
+          <ul class="theory-list">
+            <li><b>Definition:</b> AMI + substitution of 4 consecutive zeros using B/V patterns to maintain transitions.</li>
+            <li><b>Voltage levels:</b> {−V, 0, +V} with deliberate bipolar violations.</li>
+            <li><b>Characteristics:</b> DC-free; avoids long zero runs; compatible with AMI receivers.</li>
+            <li><b>Advantages:</b> Good synchronization; low DC; suitable for long-haul links.</li>
+            <li><b>Disadvantages:</b> Increased encoder/decoder complexity; violation detection required.</li>
+            <li><b>Applications:</b> E-carrier (E1) PCM transmission systems.</li>
+          </ul>
+        </div>
+
+        <div class="plot-box">
+          <div class="theory-title">B8ZS</div>
+          <ul class="theory-list">
+            <li><b>Definition:</b> AMI + substitution of 8 consecutive zeros using a violation pattern.</li>
+            <li><b>Voltage levels:</b> {−V, 0, +V} with specific substitution pulses.</li>
+            <li><b>Characteristics:</b> DC-free; maintains transition density; prevents sync loss on long zeros.</li>
+            <li><b>Advantages:</b> Reliable synchronization; AC/transformer friendly; practical for carrier lines.</li>
+            <li><b>Disadvantages:</b> More complex; substitution detection must be correct.</li>
+            <li><b>Applications:</b> T1 digital carrier and related North-American telecom links.</li>
+          </ul>
+        </div>
+
+        <div class="plot-box">
+          <div class="theory-title">Duobinary</div>
+          <ul class="theory-list">
+            <li><b>Definition:</b> Partial-response code using controlled ISI (conceptually y[k] = x[k] + x[k−1]).</li>
+            <li><b>Voltage levels:</b> Multi-level (typically 3 levels such as −2, 0, +2 or scaled variants).</li>
+            <li><b>Characteristics:</b> Reduced bandwidth; introduces memory between symbols; needs suitable decoding/precoding.</li>
+            <li><b>Advantages:</b> Spectrally efficient; suited to band-limited channels.</li>
+            <li><b>Disadvantages:</b> Receiver complexity; potential error propagation without proper design; sensitive to channel distortion.</li>
+            <li><b>Applications:</b> High-speed baseband transmission with constrained spectrum (partial-response systems).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="plot-box" style="margin-top:14px;">
+        <h1>Block Diagram</h1>
+        <p>The diagram below illustrates the flow from bit source → line coding mapper → waveform shaping → channel → receiver decision.</p>
+        <div class="dynamic-block-diagram">
+          <div class="block-row">
+            <div class="block glow-blue">Bit<br>Generator</div>
+            <div class="arrow"></div>
+            <div class="block glow-cyan">Line Coding<br><span class="sub">NRZ / RZ / Manchester / AMI / HDB3 / B8ZS / Duobinary</span></div>
+            <div class="arrow"></div>
+            <div class="block glow-orange">Waveform<br>Shaper</div>
+            <div class="arrow"></div>
+            <div class="block glow-green">Clock / Sync</div>
+            <div class="arrow"></div>
+            <div class="block glow-purple">Channel</div>
+            <div class="arrow"></div>
+            <div class="block glow-pink">RX / Decision</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <!-- PROCEDURE -->
+    <section id="procedure" class="panel">
+      <div class="page-container">
+
+        <!-- Phase I -->
+        <div class="procedure-phase-card">
+          <h3 class="procedure-sub">Phase I: System Initialization</h3>
+          <ol class="detailed-list" start="1">
+            <li>
+              <strong>Enter Binary Sequence:</strong> In the <b>Binary Input</b> field, type your desired 8-bit binary sequence 
+              (e.g., <code>10110100</code>).
+            </li>
+            <li>
+              <strong>Validation Check:</strong> Ensure only <b>0s and 1s</b> are used. A default sequence is available for testing.
+            </li>
+            <li>
+              <strong>Generate Signal:</strong> Click the 
+              <span class="cyber-highlight">GENERATE</span> button to display the waveform.
+            </li>
+              <div class="video-container">
+                <video class="step-instruction-video" autoplay loop muted playsinline>
+                  <source src="assets/phase1.mp4" type="video/mp4">
+                </video>
+              </div>             
+            </li>
+          </ol>
+        </div>
+
+        <!-- Phase II -->
+        <div class="procedure-phase-card">
+          <h3 class="procedure-sub">Phase II: Encoding & Signal Generation</h3>
+          <ol class="detailed-list" start="4">
+            <li>
+              <strong>Analyse the Output Signal:</strong> Observe the generated line coded waveform for the selected scheme.
+            </li>
+            <div class="video-container">
+                <video class="step-instruction-video" autoplay loop muted playsinline>
+                  <source src="assets/phase2.mp4" type="video/mp4">
+                </video>
+              </div>
+          </ol>
+        </div>
+
+        <!-- Phase III -->
+        <div class="procedure-phase-card">
+          <h3 class="procedure-sub">Phase III: Comparison of Output Signals and PSD Analysis</h3>
+          <ol class="detailed-list" start="5">
+            <li>
+              <strong>Select the two encoding schemes to compare:</strong> Use the dropdowns to choose any two line coding schemes for comparison.
+            </li>
+              <div class="video-container">
+                <video class="step-instruction-video" autoplay loop muted playsinline>
+                  <source src="assets/phase3.mp4" type="video/mp4">
+                </video>
+              </div>
+          </ol>
+        </div>
+    </div>
+    </section>
+
+    <!-- PRE-TEST -->
+    <section id="pretest" class="panel">
+      <div class="page-container">
+      <h1>Pre-Test</h1>
+      <div class="mcq-wrap">
+        <div id="pretestQuestions"></div>
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <button id="pretestSubmit" class="themebtn">Submit Test</button>
+        </div>
+        <div id="pretestResult" class="mcq-result" style="display:none;"></div>
+      </div>
+    </div>
+    </section>
+
+    <!-- SIMULATION -->
+    <section id="simulation" class="panel">
+      <div class="page-container">
+      <h1>Simulation</h1>
+      <div class="sim-controls">
+        <label>Bit Sequence:</label>
+        <input id="bitSeq" placeholder="e.g. 1011001" />
+        <button id="randomBtn" class="themebtn">Random</button>
+        <label>Line Coding Scheme:</label>
+        <select id="scheme"></select>
+        <button id="renderBtn" class="themebtn">Generate</button>
+      </div>
+
+      <div class="plots">
+        <div class="plot-label">INPUT WAVEFORM</div>
+        <div id="inputPlot" class="plot-box"></div>
+        <div class="plot-label">OUTPUT WAVEFORM</div>
+        <div id="outputPlot" class="plot-box"></div>
+        <div id="duobinaryLogicBox" class="plot-box" style="display:none; margin-top:12px;">
+          <div class="theory-title">Duobinary Encoding Logic</div>
+          <ul class="theory-list">
+            <li><b>Binary mapping:</b> bit 1 &rarr; +1, bit 0 &rarr; &minus;1</li>
+            <li><b>Formula:</b> c<sub>k</sub> = a<sub>k</sub> + a<sub>k&minus;1</sub>, with a<sub>&minus;1</sub> = 0</li>
+            <li><b>Voltage levels:</b> &minus;2, 0, +2</li>
+          </ul>
+          <div id="duobinaryExample" class="info-text" style="margin-top:10px;"></div>
+        </div>
+        <div id="modifiedDuobinaryLogicBox" class="plot-box" style="display:none; margin-top:12px;">
+          <div class="theory-title">Modified Duobinary Encoding Logic</div>
+          <ul class="theory-list">
+            <li><b>Binary mapping:</b> bit 1 &rarr; +1, bit 0 &rarr; &minus;1</li>
+            <li><b>Formula:</b> c<sub>k</sub> = a<sub>k</sub> &minus; a<sub>k&minus;1</sub>, with a<sub>&minus;1</sub> = 0</li>
+            <li><b>Voltage levels:</b> &minus;2, 0, +2</li>
+          </ul>
+          <div id="modifiedDuobinaryExample" class="info-text" style="margin-top:10px;"></div>
+        </div>
+      </div>
+
+      <h1 style="margin-top:18px;">Power Spectral Density (PSD)</h1>
+      <div id="psdPlot" class="plot-box" style="height:420px;"></div>
+      <div id="psdInfo" class="info-text"></div>
+
+      <h1 style="margin-top:18px;">Compare Schemes</h1>
+      <div class="compare-controls">
+        <label>Scheme A:</label>
+        <select id="schemeA"></select>
+        <label>Scheme B:</label>
+        <select id="schemeB"></select>
+        <button id="compareBtn" class="themebtn">Compare</button>
+      </div>
+      <div id="compareWaveform" class="plot-box"></div>
+      <div id="comparePSD" class="plot-box"></div>
+      <div id="compareInfo" class="info-text"></div>
+    </div>
+    <button id="hintToggle" class="floating-hint-btn">💡</button>
+
+
+    <div id="hintPanel" class="floating-hint-panel">
+  <h3>Quick Help</h3>
+  <ul class="hint-list">
+    <li>Only <strong>0's and 1's</strong> should be entered.</li>
+    <li>HDB3 requires long runs of <strong>0000</strong>.</li>
+    <li>B8ZS requires long runs of <strong>00000000</strong>.</li>
+  </ul>
+  <div class="hint-actions">
+    <button id="btnNormal">Random 8-bit</button>
+    <button id="btnHDB3">Random 16-bit (HDB3)</button>
+    <button id="btnB8ZS">Random 16-bit (B8ZS)</button>
+  </div>
+</div>
+    </section>
+
+    <!-- POST-TEST -->
+    <section id="posttest" class="panel">
+      <div class="page-container">  
+      <h1>Post-Test</h1>
+      <div class="mcq-wrap">
+        <div id="posttestQuestions"></div>
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <button id="posttestSubmit" class="themebtn">Submit Test</button>
+        </div>
+        <div id="posttestResult" class="mcq-result" style="display:none;"></div>
+      </div>
+    </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="results" class="panel">
+      <div class="page-container">
+      <h1>Results &amp; Observations</h1>
+
+      <div class="plot-box">
+        <div class="theory-title"> Observations (per scheme)</div>
+        <ul class="theory-list">
+          <li><b>Unipolar NRZ:</b> Strong DC; narrow main lobe; weak sync on long runs; simple but not AC-coupling friendly.</li>
+          <li><b>Unipolar RZ:</b> Better timing than NRZ; higher bandwidth; DC may still exist for unbalanced data.</li>
+          <li><b>Polar NRZ:</b> Better power efficiency than unipolar; reduced DC for balanced data; sync issues on long constant patterns.</li>
+          <li><b>Polar RZ:</b> Regular returns to zero improve timing; higher bandwidth than NRZ.</li>
+          <li><b>AMI:</b> Near-zero DC; moderate bandwidth; long zero runs reduce transitions without scrambling.</li>
+          <li><b>Pseudoternary:</b> Low DC; transition density depends on zeros; complements AMI behavior.</li>
+          <li><b>Manchester:</b> DC-free and self-synchronizing; high bandwidth; robust clock recovery.</li>
+          <li><b>HDB3 / B8ZS:</b> Maintain synchronization by inserting violations during long zero runs; DC-free and carrier-friendly.</li>
+          <li><b>Duobinary:</b> Reduced bandwidth via controlled ISI; requires careful receiver/precoding design.</li>
+        </ul>
+      </div>
+
+      <div class="plot-box" style="margin-top:14px;">
+        <div class="theory-title">Comparison Summary</div>
+        <ul class="theory-list">
+          <li><b>DC component:</b> Highest in unipolar codes; very low in Manchester, AMI, HDB3, and B8ZS.</li>
+          <li><b>Bandwidth:</b> RZ and Manchester increase bandwidth; duobinary reduces bandwidth by partial-response signaling.</li>
+          <li><b>Synchronization:</b> Manchester provides best self-clocking; bipolar schemes need scrambling for long zero runs.</li>
+          <li><b>Use-cases:</b> Carrier systems prefer DC-free + sync-preserving codes (HDB3/B8ZS); timing-critical links use Manchester.</li>
+        </ul>
+      </div>
+
+      <div class="plot-box" style="margin-top:14px;">
+        <div class="theory-title">Conclusion</div>
+        <p>Line coding is chosen by balancing synchronization, DC content, bandwidth, and complexity. In practice, DC-free and synchronization-friendly schemes (Manchester or bipolar with scrambling such as HDB3/B8ZS) are widely preferred, while partial-response schemes (duobinary) can improve spectral efficiency when controlled ISI is properly handled.</p>
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
+    
